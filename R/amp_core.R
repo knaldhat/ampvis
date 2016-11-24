@@ -29,18 +29,13 @@
 
 amp_core <- function(data, group = "Sample", scale.seq = 100, tax.class = NULL, tax.empty = "best", plot.type = "frequency", output = "plot",  tax.aggregate = "OTU", weight = T, abund.treshold = 0.1){
   
-  ## Check the input data type and convert to list if it's a phyloseq object
-  data <- list(abund = as.data.frame(otu_table(data)@.Data),
-               tax = data.frame(tax_table(data)@.Data, OTU = rownames(tax_table(data))),
-               sample = suppressWarnings(as.data.frame(as.matrix(sample_data(data)))))
-  
   ## Clean up the taxonomy
   data <- amp_rename(data = data, tax.class = tax.class, tax.empty = tax.empty, tax.level = tax.aggregate)
   
-  ## Extract the data into seperate objects for readability
-  abund <- data[["abund"]]  
+  ## Extract the data into separate objects for readability
+  abund <- data[["abund"]]
   tax <- data[["tax"]]
-  sample <- data[["sample"]]
+  sample <- data[["metadata"]]
   
   # Aggregate to a specific taxonomic level
   abund1 <- cbind.data.frame(Display = tax[,tax.aggregate], abund) %>%

@@ -22,7 +22,7 @@
 
 amp_rarecurve <- function(data, step = 100, ylim = NULL, xlim = NULL, label = F, color = NULL, legend = T, color.vector = NULL, legend.position = "topleft"){
   
-  abund = otu_table(data)@.Data %>% as.data.frame()
+  abund <- data[["abund"]]
   
 if (!is.null(color)) {
   gg_color_hue <- function(n) {

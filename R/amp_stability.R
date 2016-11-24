@@ -23,8 +23,9 @@
 
 amp_stability <- function(data, date, group = NULL, plot.type = "time", plot.theme = "clean", output = "plot", method = "bray", color = "Plant1", order = NULL){
   
-  abund = t(as.data.frame(otu_table(data)@.Data))
-  sample = suppressWarnings(as.data.frame(as.matrix(sample_data(data))))
+  ## Extract the data into separate objects for readability
+  abund <- data[["abund"]]
+  sample <- data[["metadata"]]
   
   if (is.null(group)){
     sample$tgroup <- "A"

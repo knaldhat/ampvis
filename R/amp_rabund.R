@@ -38,18 +38,13 @@
 
 amp_rabund <- function(data, group = "Sample", order.group = NULL, tax.show = 50, scale.seq = 100, tax.clean = T, plot.type = "boxplot", plot.log = F, output = "plot", tax.add = NULL, tax.aggregate = "Genus", tax.empty = "best", tax.class = NULL, point.size = 2, plot.flip = F, sort.by = "median", adjust.zero = NULL, plot.theme = "normal", order.y = NULL){
   
-  ## Check the input data type and convert to list if it's a phyloseq object
-  data <- list(abund = as.data.frame(otu_table(data)@.Data),
-               tax = data.frame(tax_table(data)@.Data, OTU = rownames(tax_table(data))),
-               sample = suppressWarnings(as.data.frame(as.matrix(sample_data(data)))))
-  
   ## Clean up the taxonomy
   data <- amp_rename(data = data, tax.class = tax.class, tax.empty = tax.empty, tax.level = tax.aggregate)
   
   ## Extract the data into separate objects for readability
-  abund <- data[["abund"]]  
+  abund <- data[["abund"]]
   tax <- data[["tax"]]
-  sample <- data[["sample"]]
+  sample <- data[["metadata"]]
   
   ## Make a name variable that can be used instead of tax.aggregate to display multiple levels 
   suppressWarnings(

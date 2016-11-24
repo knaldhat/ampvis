@@ -34,17 +34,13 @@
 
 amp_test_species <- function(data, group, tax.aggregate = "OTU", tax.add = NULL, test = "Wald", fitType = "parametric", sig = 0.01, fold = 0, tax.class = NULL, tax.empty = "best", label = F, plot.type = "point", plot.show = NULL, plot.point.size = 2, plot.theme = "normal", parallel = F , adjust.zero = NULL){
   
-  data <- list(abund = as.data.frame(otu_table(data)@.Data),
-               tax = data.frame(tax_table(data)@.Data, OTU = rownames(tax_table(data))),
-               sample = suppressWarnings(as.data.frame(as.matrix(sample_data(data)))))
-  
   ## Clean up the taxonomy
   data <- amp_rename(data = data, tax.class = tax.class, tax.empty = tax.empty, tax.level = tax.aggregate)
   
   ## Extract the data into seperate objects for readability
   abund <- data[["abund"]]  
   tax <- data[["tax"]]
-  sample <- data[["sample"]]
+  sample <- data[["metadata"]]
 
   ## Make a name variable that can be used instead of tax.aggregate to display multiple levels 
   suppressWarnings(

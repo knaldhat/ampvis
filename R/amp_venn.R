@@ -23,11 +23,11 @@
 
 amp_venn <- function(data, group = NULL,cut_a = 0.1, cut_f = 80, text.size = 5, output = "plot"){
   
-  ## Retrieve data
-  abund <- as.data.frame(otu_table(data)@.Data)
-  tax <- data.frame(tax_table(data)@.Data)
-  OTU <- rownames(tax_table(data))
-  sample <- suppressWarnings(as.data.frame(as.matrix(sample_data(data))))
+  ## Extract the data into separate objects for readability
+  abund <- data[["abund"]]
+  tax <- data[["tax"]]
+  OTU <- data[["tax"]]["OTU"]
+  sample <- data[["metadata"]]
   
   ## Test for number of groups
   if (length(levels(sample[,group])) > 3){

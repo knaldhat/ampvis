@@ -58,21 +58,13 @@
 
 amp_ordinate <- function(data, scale = NULL, trans = "sqrt", ordinate.type = "PCA", ncomp = 5, plot.x = "PC1", plot.y = "PC2", plot.color = NULL, plot.color.order = NULL, plot.point.size = 3, plot.shape = NULL, plot.species = F, plot.nspecies = NULL, plot.nspecies.tax = "Genus", plot.label = NULL, plot.group = NULL, plot.group.label = NULL, envfit.factor = NULL, envfit.numeric = NULL, envfit.significant = 0.001, envfit.resize = 1, envfit.color = "darkred", envfit.textsize = 3, envfit.show = T, tax.empty ="best", output = "plot", constrain = NULL, scale.species = F, trajectory = NULL, trajectory.group = trajectory, plot.group.label.size = 4, plot.theme = "normal", plot.group.manual = NULL, plot.label.size = 3, plot.label.repel = F, plot.label.seqment.color = "black", plot.nspecies.repel = F, plot.species.size = 2, plot.nspecies.size = 4){
   
-  ## Load the data. If phyloseq object it should be converted to a list of data.frames
-  data <- list(abund = as.data.frame(otu_table(data)@.Data),
-               tax = data.frame(tax_table(data)@.Data, OTU = rownames(tax_table(data))),
-               #sample = suppressWarnings(as.data.frame(as.matrix(sample_data(data)))))
-               sample = as.data.frame(sample_data(data)))
-  
-  
   ## Clean up the taxonomy
   data <- amp_rename(data = data, tax.empty = tax.empty)
   
-  
-  ## Extract the data into seperate objects for readability
-  abund <- data[["abund"]]  
+  ## Extract the data into separate objects for readability
+  abund <- data[["abund"]]
   tax <- data[["tax"]]
-  sample <- data[["sample"]]
+  sample <- data[["metadata"]]
   
   outlist <- list(abundance = abund, taxonomy = tax, sampledata = sample)
   

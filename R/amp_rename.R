@@ -19,8 +19,8 @@
 
 amp_rename <- function(data, tax.class = NULL, tax.empty = "best", tax.level = "Genus"){
   
-  tax <- data[["tax"]]
-    
+  tax = data[["tax"]]
+  
   ## First make sure that all entires are strings
   for ( i in 1:ncol(tax) ){
     tax[,i] <- as.character(tax[,i])  
@@ -59,7 +59,7 @@ amp_rename <- function(data, tax.class = NULL, tax.empty = "best", tax.level = "
   }
   
   tax[is.na(tax)] <- ""
-    
+  
   ## How to handle empty taxonomic assignments
   if (tax.empty == "OTU"){
     for (i in 1:nrow(tax)) {
@@ -72,7 +72,7 @@ amp_rename <- function(data, tax.class = NULL, tax.empty = "best", tax.level = "
     }
   }
   
-## Handle empty taxonomic strings
+  ## Handle empty taxonomic strings
   if(tax.empty == "best"){
     tax <- mutate(tax, Kingdom, Kingdom = ifelse(Kingdom == "", "Unclassified", Kingdom)) %>%
       mutate(Phylum, Phylum = ifelse(Phylum == "", paste("k__", Kingdom, "_", rownames(tax), sep = ""), Phylum)) %>%
@@ -82,7 +82,7 @@ amp_rename <- function(data, tax.class = NULL, tax.empty = "best", tax.level = "
       mutate(Genus, Genus = ifelse(Genus == "", ifelse(grepl("__", Family), Family, paste("f__", Family, "_", rownames(tax), sep = "")), Genus)) %>%
       mutate(Species, Species = ifelse(Species == "", ifelse(grepl("__", Genus), Genus, paste("g__", Genus, "_", rownames(tax), sep = "")), Species))
   }
-
+  
   if(tax.empty == "remove"){
     abund <- data[["abund"]]
     tax <- subset(tax, tax[,tax.level] != "")

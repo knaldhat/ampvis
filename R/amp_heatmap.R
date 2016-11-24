@@ -44,17 +44,13 @@
 
 amp_heatmap <- function(data, group = "Sample", normalise = NULL, scale = NULL, tax.aggregate = "Phylum", tax.add = NULL, tax.show = 10, tax.class = NULL, tax.empty = "best", order.x = NULL, order.y = NULL, plot.numbers = T, plot.breaks = NULL, plot.colorscale = "log10", plot.na = T, scale.seq = 100, output = "plot",plot.text.size = 4, plot.theme = "normal", calc = "mean", min.abundance = 0.1, max.abundance = NULL, sort.by = NULL, color.vector = NULL, round = 1){
   
-  data <- list(abund = as.data.frame(otu_table(data)@.Data),
-               tax = data.frame(tax_table(data)@.Data, OTU = rownames(tax_table(data))),
-               sample = suppressWarnings(as.data.frame(as.matrix(sample_data(data)))))
-  
   ## Clean up the taxonomy
   data <- amp_rename(data = data, tax.class = tax.class, tax.empty = tax.empty, tax.level = tax.aggregate)
   
   ## Extract the data into separate objects for readability
-  abund <- data[["abund"]]  
+  abund <- data[["abund"]]
   tax <- data[["tax"]]
-  sample <- data[["sample"]]
+  sample <- data[["metadata"]]
   
   ## Scale the data by a selected metadata sample variable
   if (!is.null(scale)){
