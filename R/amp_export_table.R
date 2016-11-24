@@ -10,28 +10,25 @@
 #' @param sort.samples Vector to sort the samples by.
 #' 
 #' @export
-#' @import phyloseq
 #' 
 #' @author Mads Albertsen \email{MadsAlbertsen85@@gmail.com}
 
 amp_export_table <- function(data, file = "exported_otutable.txt", id = NULL, sort.samples = NULL){
   
-  samples <- data.frame(otu_table(data)@.Data)
+  samples <- data[["abund"]]
   
   if(!is.null(id)){
-    colnames(samples) <- as.character(unlist(sample_data(data)[,id]))
+    colnames(samples) <- as.character(unlist(data[["metadata"]][,id]))
   }
   
   if(!is.null(sort.samples)){
     samples <- samples[,sort.samples]
   }
   
-  e_bak <- cbind.data.frame(samples, 
-                            data.frame(tax_table(data)@.Data, 
-                                       OTU = rownames(tax_table(data))))
+  e_bak <- cbind.data.frame(samples, tax)
   
   e_bak2 <- mutate(e_bak, 
-                   sum = rowSums(e_bak[,1:nrow(sample_data(data))])) %>%
+                   sum = rowSums(e_bak[,1:nrow(data[["metadata"]])])) %>%
     arrange(desc(sum)) %>%
     select(-sum)
   

@@ -50,7 +50,6 @@
 #' @import ggplot2
 #' @import dplyr
 #' @import reshape2
-#' @import phyloseq
 #' @import grid
 #' @import vegan
 #' 

@@ -17,7 +17,6 @@
 #' @import ggplot2
 #' @import dplyr
 #' @import reshape2
-#' @import phyloseq
 #' 
 #' @author Mads Albertsen \email{MadsAlbertsen85@@gmail.com}
 
@@ -31,7 +30,7 @@ amp_venn <- function(data, group = NULL,cut_a = 0.1, cut_f = 80, text.size = 5, 
   
   ## Test for number of groups
   if (length(levels(sample[,group])) > 3){
-    stop(paste("A maximum of 3 levels are supported. The grouping viable contains:",
+    stop(paste("A maximum of 3 levels are supported. The grouping variable contains:",
                paste(levels(sample[,group]), collapse = ", ")))
   }
   

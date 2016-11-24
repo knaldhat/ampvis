@@ -9,16 +9,15 @@
 #' @param tax Add taxonomic strings to the output (default: T).
 #' 
 #' @export
-#' @import phyloseq
 #' 
 #' @author Mads Albertsen \email{MadsAlbertsen85@@gmail.com}
 
 amp_export <- function(data, file = "exported_sequences.fa", tax = T){
   
-  t <- refseq(data)
+  t <- refseq(data) ######## fasta files not part of amp_load ######## UPDATE ########
   
   if (tax == T){
-    tax <- as.data.frame(tax_table(data))
+    tax <- as.data.frame(data[["tax"]][,1:7])
     tax_s <- data.frame(lapply(tax, as.character), stringsAsFactors=FALSE)
     df_args <- c(tax_s, sep="; ")
     tax_sf <- do.call(paste, df_args)

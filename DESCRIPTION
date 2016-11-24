@@ -14,7 +14,6 @@ Depends:
     ggplot2,
     ggrepel,
     reshape2,
-    phyloseq,
     grid,
     vegan,
     knitr,

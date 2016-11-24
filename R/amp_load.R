@@ -12,7 +12,6 @@
 #' @return A phyloseq object.
 #' 
 #' @export
-#' @import phyloseq
 #' @import dplyr
 #' 
 #' @author Mads Albertsen \email{MadsAlbertsen85@@gmail.com}

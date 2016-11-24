@@ -15,7 +15,6 @@
 #' @param output Either "plot" or "complete" (default: "plot").
 #' 
 #' @export
-#' @import phyloseq
 #' @import dplyr
 #' @import vegan
 #' 

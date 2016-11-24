@@ -15,7 +15,6 @@
 #' 
 #' @export
 #' @import ggplot2
-#' @import phyloseq
 #' @import ape
 #' 
 #' @author Mads Albertsen \email{MadsAlbertsen85@@gmail.com}

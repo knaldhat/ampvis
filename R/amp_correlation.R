@@ -30,7 +30,6 @@
 #' @import dplyr
 #' @import igraph
 #' @import reshape2
-#' @import phyloseq
 #' @import grid
 #' 
 #' @author Mads Albertsen \email{MadsAlbertsen85@@gmail.com}

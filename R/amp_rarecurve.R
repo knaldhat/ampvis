@@ -15,7 +15,6 @@
 #' @param legend.position Position of the legend (default: "topleft").
 #' 
 #' @export
-#' @import phyloseq
 #' @import vegan
 #' 
 #' @author Mads Albertsen \email{MadsAlbertsen85@@gmail.com}
@@ -29,7 +28,7 @@ if (!is.null(color)) {
     hues = seq(15, 375, length=n+1)
     hcl(h=hues, l=65, c=100)[1:n]
   }
-  group_vector<-sample_data(data)[,color]@.Data %>% as.data.frame()
+  group_vector<-data[["metadata"]][,color] %>% as.data.frame()
   names(group_vector)<-"color_variable"
   group_vector<-as.character(group_vector$color_variable)
   groups<-unique(group_vector)

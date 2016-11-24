@@ -12,7 +12,6 @@
 #' @return A phyloseq object with cleaned and renamed taxonomy.
 #' 
 #' @export
-#' @import phyloseq
 #' @import dplyr
 #' 
 #' @author Mads Albertsen \email{MadsAlbertsen85@@gmail.com}
@@ -21,7 +20,7 @@ amp_rename <- function(data, tax.class = NULL, tax.empty = "best", tax.level = "
   
   tax = data[["tax"]]
   
-  ## First make sure that all entires are strings
+  ## First make sure that all entries are strings
   for ( i in 1:ncol(tax) ){
     tax[,i] <- as.character(tax[,i])  
   }
