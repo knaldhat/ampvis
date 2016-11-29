@@ -49,7 +49,7 @@ amp_load <- function(otutable, metadata, refseq = NULL, rarefy = NULL, percent =
   }
   
   #tax: the last 7 columns from otutable to factor, order rows by rownames and order columns by taxonomic rank(not alphabetically)
-  tax <- data.frame(otutable[, (ncol(otutable) - 6):ncol(otutable)] %>% transform(as.factor) 
+  tax <- data.frame(otutable[, (ncol(otutable) - 6):ncol(otutable)] 
                     ,OTU = rownames(otutable))
   tax <- tax[order(rownames(tax)), c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species", "OTU")]
   
@@ -57,7 +57,7 @@ amp_load <- function(otutable, metadata, refseq = NULL, rarefy = NULL, percent =
   if(!is.null(refseq) & class(refseq) == "DNAStringSet") {
     data <- list(abund = abund, tax = tax, metadata = metadata, refseq = refseq)
   } else if(!is.null(refseq) & !class(refseq) == "DNAStringSet") {
-    stop("The provided reference sequences must be loaded with readDNAStringSet() from the biostrings package.")
+    stop("The reference sequences must be loaded with readDNAStringSet() from the biostrings package.")
   } else if(is.null(refseq)) {
     data <- list(abund = abund, tax = tax, metadata = metadata)
   }
