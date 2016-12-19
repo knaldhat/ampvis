@@ -38,9 +38,8 @@ amp_load <- function(otutable, metadata, refseq = NULL, rarefy = NULL, percent =
   rownames(metadata) <- metadata[,1]
   metadata <- metadata[order(rownames(metadata)), ]
   
-  #remove punctuation characters ( !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~ ) and spaces from metadata column names
-  colnames(metadata) <- str_replace_all(colnames(metadata), "[:punct:]", "")
-  colnames(metadata) <- str_replace_all(colnames(metadata), "[:blank:]", "")
+  #Only alphanumeric characters in metadata column names, replace others with _
+  colnames(metadata) <- str_replace_all(colnames(metadata), "[^[:alnum:]]", "_")
   
   #abund: all columns from otutable except the last 7 to numeric and order rows by rownames:
   abund <- as.data.frame(otutable[,1:(ncol(otutable) - 7)])/1
