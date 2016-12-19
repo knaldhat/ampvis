@@ -52,7 +52,10 @@ amp_load <- function(otutable, metadata, refseq = NULL, rarefy = NULL, percent =
   
   #abundances to percent, must be done AFTER rarefy
   if(percent == TRUE) {
-    abund <- as.data.frame(sapply(abund, function(x) x/sum(x)*100))
+    abund_pct <- as.data.frame(sapply(abund, function(x) x/sum(x)*100))
+    #keep the rownames!
+    rownames(abund_pct) <- rownames(abund)
+    abund <- abund_pct
   }
   
   #tax: the last 7 columns from otutable to factor, order rows by rownames and order columns by taxonomic rank(not alphabetically)
