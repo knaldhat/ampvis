@@ -19,6 +19,10 @@
 #' @author Mads Albertsen \email{MadsAlbertsen85@@gmail.com}
 
 amp_load <- function(otutable, metadata, refseq = NULL, rarefy = NULL, percent = FALSE){
+  #Must be data frames
+  otutable <- as.data.frame(otutable)
+  metadata <- as.data.frame(metadata)
+  
   # Remove whitespace from the otutable as this will break the structure of the taxonomy
   trim <- function (x) gsub("^\\s+|\\s+$", "", x)
   otutable$Kingdom<-trim(as.character(otutable$Kingdom))
@@ -30,9 +34,13 @@ amp_load <- function(otutable, metadata, refseq = NULL, rarefy = NULL, percent =
   otutable$Species<-trim(as.character(otutable$Species))
   
   #metadata: order rows by rownames
-  rownames(metadata) <- metadata[,1]
   metadata = suppressWarnings(as.data.frame(as.matrix(metadata)))
+  rownames(metadata) <- metadata[,1]
   metadata <- metadata[order(rownames(metadata)), ]
+  
+  #remove punctuation characters ( !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~ ) and spaces from metadata column names
+  colnames(metadata) <- str_replace_all(colnames(metadata), "[:punct:]", "")
+  colnames(metadata) <- str_replace_all(colnames(metadata), "[:blank:]", "")
   
   #abund: all columns from otutable except the last 7 to numeric and order rows by rownames:
   abund <- as.data.frame(otutable[,1:(ncol(otutable) - 7)])/1
