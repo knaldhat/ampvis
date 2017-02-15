@@ -11,10 +11,10 @@
 #' 
 #' @author Mads Albertsen \email{MadsAlbertsen85@@gmail.com}
 
-amp_stats <- function(data, split = TRUE, measures = "Observed"){
+function (data, split = TRUE, measures = "Observed") 
+{
   Reads <- rowSums(data[["abund"]])
   dmeta <- data[["metadata"]]
-  
   if (!any(data[["abund"]] == 1)) {
     warning("The data you have provided does not have\n", 
             "any singletons. This is highly suspicious. Results of richness\n", 
@@ -23,7 +23,7 @@ amp_stats <- function(data, split = TRUE, measures = "Observed"){
             "We recommended that you find the un-trimmed data and retry.")
   }
   if (!split) {
-    OTU <- rowSums(data)
+    OTU <- rowSums(data[["abund"]])
   }
   else if (split) {
     OTU <- as(data[["abund"]], "matrix")
@@ -80,8 +80,7 @@ amp_stats <- function(data, split = TRUE, measures = "Observed"){
                    colnames(rich), ignore.case = TRUE)
   rich = rich[, sort(unique(unlist(colkeep))), drop = FALSE]
   rich <- as.data.frame(rich)
-  
-  combined <- cbind.data.frame(dmeta, Reads, rich) %>% 
-    arrange(Reads)
+  combined <- cbind.data.frame(dmeta, Reads, rich) %>% arrange(Reads)
   return(combined)
 }
+
