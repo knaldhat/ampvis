@@ -11,7 +11,7 @@
 #' @import dplyr
 #' @author Mads Albertsen \email{MadsAlbertsen85@@gmail.com}
 
-function (data, split = TRUE, measures = "Observed") 
+amp_stats <- function (data, split = TRUE, measures = "Observed") 
 {
   Reads <- rowSums(data[["abund"]])
   dmeta <- data[["metadata"]]
