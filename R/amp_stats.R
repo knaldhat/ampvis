@@ -8,7 +8,7 @@
 #' @param measure Alpha-diversity measures to be included (default:observed).
 #' 
 #' @export
-#' 
+#' @import dplyr
 #' @author Mads Albertsen \email{MadsAlbertsen85@@gmail.com}
 
 function (data, split = TRUE, measures = "Observed") 
